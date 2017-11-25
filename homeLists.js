@@ -27,7 +27,7 @@ function init(){
             var listElement = document.createElement("div");
             listElement.className = "listElement";
             var listName = document.createElement("h4");
-            listName.textContent = data.ListName;
+            listName.textContent = data.ListName + " - " + data.Date;
             listElement.appendChild(listName);
             //Buttons div
             var buttonsDiv = document.createElement("div");
