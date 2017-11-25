@@ -1,0 +1,42 @@
+body{
+    background-color: #1f2833;
+    color: white;
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+}
+
+input{
+    background-color: transparent;
+    color: #1f2833;
+    background-position: center;
+    text-align: center;
+    width: 75%;
+    height: 75%;
+}
+
+button{
+    color:#1f2833 !important;
+}
+
+#itemInput{
+    width: 100%;
+    height: 100%;
+    padding-top:20px;
+    padding-bottom: 20px;
+    background-position: center;
+    text-align:center;
+    background-color: #66fcf1;
+    color: #1f2833;
+}
+
+#postItem{
+    cursor: pointer;
+    color:#1f2833;
+}
+
+.listItem{
+    display: inline-table;
+    width: 25%;
+    margin: 2px;
+}
