@@ -19,7 +19,7 @@ function init(){
         }
       });
     $('#listItem').keyup(function(event){
-        if(event.keyCode === 13{
+        if(event.keyCode === 13){
            createList();
            }
     }); 
