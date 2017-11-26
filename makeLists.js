@@ -13,6 +13,16 @@ function init(){
     firebase.initializeApp(config);
     $('#submit').on('click', createList);
     $('#leave').on('click', goHome);
+    $('#description).keyup(function(event){
+        if(event.keyCode === 13){
+            createList();   
+        }
+      });
+    $('#listItem').keyup(function(event){
+        if(event.keyCode === 13{
+           createList();
+           }
+    }); 
 }
 
 function createList(){
