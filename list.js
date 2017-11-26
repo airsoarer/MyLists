@@ -19,7 +19,7 @@ function init(){
             head();
             function head(){
                 var ref = firebase.database().ref("Users/" + firebaseUser.uid + "/Lists/" + uid);
-                ref.on("value", function(snapshot){
+                ref.once("value", function(snapshot){
                     var data = snapshot.val();
                     console.log(data);
                     
