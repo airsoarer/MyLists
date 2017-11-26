@@ -27,7 +27,7 @@ function init(){
                     h2.textContent = data.ListName;
                     var h4 = document.createElement("h4");
                     h4.textContent = data.Date;
-                    var h6 = document.createElement("h6");
+                    var h6 = document.createElement("h4");
                     h6.textContent = data.ListDescription;
                     $('body').prepend(h2, h4, h6);
                 });
