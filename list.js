@@ -23,13 +23,15 @@ function init(){
                     var data = snapshot.val();
                     console.log(data);
                     
-                    var h2 = document.createElement("h2");
-                    h2.textContent = data.ListName;
-                    var h4 = document.createElement("h4");
-                    h4.textContent = data.Date;
-                    var h6 = document.createElement("h4");
-                    h6.textContent = data.ListDescription;
-                    $('body').prepend(h2, h4, h6);
+                    for(var i = 0; i < 1; i++){
+                        var h2 = document.createElement("h2");
+                        h2.textContent = data.ListName;
+                        var h4 = document.createElement("h4");
+                        h4.textContent = data.Date;
+                        var h6 = document.createElement("h4");
+                        h6.textContent = data.ListDescription;
+                        $('body').prepend(h2, h4, h6);
+                    }
                 });
                 items();
             }
