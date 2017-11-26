@@ -26,9 +26,18 @@ function init(){
             //for(var i = 0; i < keys.length; i++){
             var listElement = document.createElement("div");
             listElement.className = "listElement";
+            var textElement = document.createElement("div");
+            textElement.className = "text";
             var listName = document.createElement("h4");
-            listName.textContent = data.ListName + " - " + data.Date;
-            listElement.appendChild(listName);
+            listName.textContent = data.ListName
+            var listDate = document.createElement("h5");
+            listDate.textContent = data.Date;
+            var listDescription = document.createElement("h5");
+            listDescription.textContent = data.ListDescription;
+            textElement.appendChild(listName);
+            textElement.appendChild(listDate);
+            textElement.appendChild(listDescription);
+            listElement.appendChild(textElement);
             //Buttons div
             var buttonsDiv = document.createElement("div");
             buttonsDiv.className = "buttons";
@@ -43,6 +52,9 @@ function init(){
             link.setAttribute('href', 'list.html?room= ' + keys);
             link.textContent = "Open";
             openBtn.appendChild(link);
+            $(openBtn).css('color', 'white');
+            $(openBtn).css('background-color', 'blue');
+            $(openBtn).css('border-radius', '10px');
             //Delete Button
             var deleteBtnDiv = document.createElement("div");
             deleteBtnDiv.className = "deleteBtn";
@@ -50,6 +62,9 @@ function init(){
             deleteBtn.className = "Delete";
             deleteBtn.id = keys;
             deleteBtnDiv.appendChild(deleteBtn);
+            $(deleteBtn).css('color', 'white');
+            $(deleteBtn).css('background-color', 'red');
+            $(deleteBtn).css('border-radius', '10px');
             buttonsDiv.appendChild(deleteBtnDiv);
             deleteBtn.textContent = "Delete";
 

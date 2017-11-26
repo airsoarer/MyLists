@@ -19,12 +19,17 @@ function init(){
             head();
             function head(){
                 var ref = firebase.database().ref("Users/" + firebaseUser.uid + "/Lists/" + uid);
-                ref.on("child_added", function(snapshot){
+                ref.on("value", function(snapshot){
                     var data = snapshot.val();
+                    console.log(data);
                     
                     var h2 = document.createElement("h2");
-                    h2.textContent = data
-                    $('body').prepend(h2);
+                    h2.textContent = data.ListName;
+                    var h4 = document.createElement("h4");
+                    h4.textContent = data.Date;
+                    var h6 = document.createElement("h6");
+                    h6.textContent = data.Description;
+                    $('body').prepend(h2, h4, h6);
                 });
                 items();
             }

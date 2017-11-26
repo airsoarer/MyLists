@@ -16,7 +16,6 @@ function init(){
 }
 
 function createList(){
-    //TODO: Fix date
    var today = new Date();
    var dd = today.getDate();
    var mm = today.getMonth()+1;
@@ -24,11 +23,13 @@ function createList(){
    var date = mm + "/" + dd +"/" + yyyy;
    console.log(date);
    var listName = $('#listName').val();
+   var listDescription = $('#description').val();
     firebase.auth().onAuthStateChanged(firebaseUser =>{
         if(firebaseUser){
             var ref = firebase.database().ref("Users/" + firebaseUser.uid + "/Lists").push({
                 Date:date,
                 ListName:listName,
+                ListDescription:listDescription,
             }).then(function(){
                 var ref = firebase.database().ref("Users/" + firebaseUser.uid + "/Lists");
                 ref.on("child_added", function(snapshot){

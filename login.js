@@ -13,6 +13,21 @@ function init(){
     firebase.initializeApp(config);
     $('#loginBtn').on('click', login);
     $('#signUpBtn').on('click', signUp);
+    $('#loginPass').keyup(function(event){
+        if(event.keyCode === 13){
+            login();
+        }
+    });
+    $('#loginEmail').keyup(function(event){
+        if(event.keyCode === 13){
+            login();
+        }
+    });
+    $('#signUpPassword').keyup(function(event){
+        if(event.keyCode === 13){
+            signUp();
+        }
+    });
 }
 
 function login(){
