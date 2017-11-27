@@ -81,6 +81,7 @@ function stateChangedLogin(){
     firebase.auth().onAuthStateChanged(firebaseUser =>{
         if(firebaseUser){
             console.log(firebaseUser);
+            alert("working");
             location.replace("homeLists.html?room= " + firebaseUser.uid);
         }else{
             console.log("Not Logged In");
