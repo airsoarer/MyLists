@@ -34,12 +34,15 @@ function createList(){
    console.log(date);
    var listName = $('#listName').val();
    var listDescription = $('#description').val();
+   var shoppingList = $('#checkBox').is(":checked");
+   console.log(shoppingList);
     firebase.auth().onAuthStateChanged(firebaseUser =>{
         if(firebaseUser){
             var ref = firebase.database().ref("Users/" + firebaseUser.uid + "/Lists").push({
                 Date:date,
                 ListName:listName,
                 ListDescription:listDescription,
+                TrueFalse:shoppingList,
             }).then(function(){
                 var ref = firebase.database().ref("Users/" + firebaseUser.uid + "/Lists");
                 ref.on("child_added", function(snapshot){
