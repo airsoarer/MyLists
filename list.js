@@ -114,7 +114,6 @@ function send(){
                 var data = snapshot.val();
                 var key = snapshot.key;
                 var h4 = data.Item;
-                pullRef.off();
                 
                 //Div for Item
                 var div = document.createElement("div");
