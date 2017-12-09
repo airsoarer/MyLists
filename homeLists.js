@@ -52,9 +52,11 @@ function init(){
             link.setAttribute('href', 'list.html?room= ' + keys);
             link.textContent = "Open";
             openBtn.appendChild(link);
-            $(openBtn).css('color', 'white');
-            $(openBtn).css('background-color', 'blue');
+            $(link).css('color', '#f7f7f7');
+            $(openBtn).css('background-color', '#4b5b5b');
             $(openBtn).css('border-radius', '10px');
+            $(openBtn).css('border-bottom-right-radius', '0px');
+            $(openBtn).css('border-top-right-radius', '0px');
             //Delete Button
             var deleteBtnDiv = document.createElement("div");
             deleteBtnDiv.className = "deleteBtn";
@@ -62,9 +64,11 @@ function init(){
             deleteBtn.className = "Delete";
             deleteBtn.id = keys;
             deleteBtnDiv.appendChild(deleteBtn);
-            $(deleteBtn).css('color', 'white');
-            $(deleteBtn).css('background-color', 'red');
+            $(deleteBtn).css('color', '#f7f7f7');
+            $(deleteBtn).css('background-color', '#991818');
             $(deleteBtn).css('border-radius', '10px');
+            $(deleteBtn).css('border-top-left-radius', '0px');
+            $(deleteBtn).css('border-bottom-left-radius', '0px');
             buttonsDiv.appendChild(deleteBtnDiv);
             deleteBtn.textContent = "Delete";
 

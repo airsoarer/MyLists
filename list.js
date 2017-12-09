@@ -13,8 +13,6 @@
     var uid = location.split("=%20");
     uid = uid[1];
 
-//My Original Idea was to have the actually subtract button hidden until they entered a price.
-//When you add a price to the price div, it takes away the subtract button.
 //When you add a item to the list, it gives the item div two buttons instead of one.
 //Let me know if there is any other problems or if you think there is something that you think I should add.
 
@@ -46,41 +44,82 @@ function init(){
                         h6.textContent = data.ListDescription;
                         $('body').prepend(h2, h4, h6);
                     }
+                    var newRef = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid);
+                    newRef.once('value', function(snapshot){
+                        var data = snapshot.val();
+                        if(data.TrueFalse === "true"){
+                            if(data.Price){
+                                var price = data.Price;
+                                totalPrice = price;
+                                var string = document.createElement("h2");
+                                string.textContent = "Your current Total is: " + price;
+                                $('#total').append(string);
+                            }else{
+                                var txt = document.createElement("h2");
+                                txt.textContent = "No totaled amount";
+                                $('#total').append(txt);
+                            }
+                        }else{
+                            
+                        }
+                    });
                 });
                 items();
             }
             function items(){
+                //TODO: add checked items to DOM
                 var ref = firebase.database().ref("Users/" + firebaseUser.uid + "/Lists/" + uid + "/Items");
                 ref.on("child_added", function(snapshot){
                     var data = snapshot.val();
                     var key = snapshot.key; 
                     var h4 = data.Item;
                 
-                //Div for Item
-                var div = document.createElement("div");
-                div.className = "listItemElement";
-                div.id = key + "div";
-                //h4 Element
-                var h4Element = document.createElement("h4");
-                h4Element.textContent = h4;
-                //Append h4 to div
-                $(div).append(h4Element);
-                //Button Div
-                var buttonDiv = document.createElement("div");
-                buttonDiv.className = "deleteButtonDiv";
-                buttonDiv.id = key + "deleteButtonDiv";
-                //Delete Button
-                var deleteButton = document.createElement("button");
-                deleteButton.textContent = "Delete";
-                deleteButton.className = "deleteButton";
-                deleteButton.id = key + "deleteButton";
-                //Append delete button to button div
-                $(buttonDiv).empty();
-                $(buttonDiv).append(deleteButton);
-                //Append button div to Items div
-                $(div).append(buttonDiv);
-                //Append Items div to List Element in the body
-                $('#listItems').append(div);
+                    var div = document.createElement("div");
+                    div.className = "listItemElement";
+                    div.id = key + "div";
+    
+                    var checkbox = document.createElement("input");
+                    checkbox.setAttribute('type', 'checkbox');
+                    checkbox.id = "check" + key;
+                    checkbox.className = "check";
+    
+                    var label = document.createElement("label");
+                    label.setAttribute('for', 'check' + key);
+                    label.innerHTML = h4;
+                    label.id = "label" + key;
+                    $(label).css('font-size', '36px');
+                    $(label).css('color', '#c9d1c9');
+    
+                    $(div).append(checkbox, label);
+                    $('#listItems').append(div);
+                });
+
+//================================================================================
+                    var checkedRef = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/CheckedItems');
+                    checkedRef.on('child_added', function(snapshot){
+                        var checkedData = snapshot.val();
+                        var checkedKey = snapshot.key;
+                        var checkedH4 = checkedData.Item          
+
+                    var div = document.createElement("div");
+                    div.className = "listItemElement";
+                    div.id = checkedKey + "div";
+
+                    var checkbox = document.createElement("input");
+                    checkbox.setAttribute('type', 'checkbox');
+                    $(checkbox).attr('checked', 'checked');
+                    checkbox.id = "check" + checkedKey;
+                    checkbox.className = "check";
+
+                    var label = document.createElement("label");
+                    label.setAttribute('for', 'check' + checkedKey);
+                    label.innerHTML = checkedH4;
+                    label.id = "label" + checkedKey;
+                    $(label).css('font-size', '36px');
+                    $(label).css('color', '#c9d1c9');
+
+                    $(div).append(checkbox, label);
+                    $('#checked').append(div);
                 });
             }
         }else{
@@ -90,7 +129,7 @@ function init(){
     $('#postItem').on('click', send);
     $(document.body).on('click', '#logout', logout);
     $(document.body).on('click', '#leave', leave);
-    $(document.body).on('click', '.deleteButton', remove);
+    $(document.body).on('click', '.check', remove);
     $(document.body).on('click', '.sub', subtract);
     $('#item').keyup(function(event){ 
         if(event.keyCode === 13){
@@ -110,36 +149,32 @@ function send(){
                 Item:listItem,
             });
             var pullRef = firebase.database().ref("Users/" + firebaseUser.uid + "/Lists/" + uid + "/Items")
-            pullRef.once("value", function(snapshot){
+            pullRef.once("child_added", function(snapshot){
                 var data = snapshot.val();
                 var key = snapshot.key;
-                var h4 = data.Item;
+                var item = data.Item;
+                pullRef.off();
                 
                 //Div for Item
                 var div = document.createElement("div");
                 div.className = "listItemElement";
                 div.id = key + "div";
-                //h4 Element
-                var h4Element = document.createElement("h4");
-                h4Element.textContent = h4;
-                //Append h4 to div
-                $(div).append(h4Element);
-                //Button Div
-                var buttonDiv = document.createElement("div");
-                buttonDiv.className = "deleteButtonDiv";
-                buttonDiv.id = key + "deleteButtonDiv";
-                //Delete Button
-                var deleteButton = document.createElement("button");
-                deleteButton.textContent = "Delete";
-                deleteButton.className = "deleteButton";
-                deleteButton.id = key + "deleteButton";
-                //Append delete button to button div
-                $(buttonDiv).empty();
-                $(buttonDiv).append(deleteButton);
-                //Append button div to Items div
-                $(div).append(buttonDiv);
-                //Append Items div to List Element in the body
+
+                var checkbox = document.createElement("input");
+                checkbox.setAttribute('type', 'checkbox');
+                checkbox.id = "check" + key;
+                checkbox.className = "check";
+
+                var label = document.createElement("label");
+                label.setAttribute('for', 'check' + key);
+                label.innerHTML = item;
+                label.id = "label" + key;
+                $(label).css('font-size', '36px');
+                $(label).css('color', '#9b6b6b');
+
+                $(div).append(checkbox, label);
                 $('#listItems').append(div);
+
             });
         }else{
             console.log("no user");
@@ -167,20 +202,30 @@ function remove(){
     firebase.auth().onAuthStateChanged(firebaseUser =>{
         if(firebaseUser){
             var btnId = $(this).attr("id");
-            btnId = btnId.split("deleteButton");
-            btnId = btnId[0];
-            var ref = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/Items/' + btnId).remove();
+            var btnIdVal = $(this).val();
+            $(this).remove();
+            btnId = btnId.split("check");
+            btnId = btnId[1];
+            var labelId = document.getElementById("label" + btnId).innerHTML;
+            var x = btnId + "div";
+            console.log(x);
+            $(x).html('');
+            firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/Items/' + btnId).remove();
+            var ref = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/CheckedItems');
+            ref.push({
+                Item:labelId,
+            });
             var id = $(this).attr("id");
-            $(this).remove();       
             var ref = firebase.database().ref("Users/" + firebaseUser.uid + "/Lists/" + uid);
             ref.once('value', function(snapshot){
                 var data = snapshot.val();
+                console.log(data.TrueFalse);
                 var trueFalse = data.TrueFalse; 
                 trueFalse = String(trueFalse);
 
                 if(trueFalse === "true"){
                     add();
-                }else{
+                }else if(trueFalse === "false"){
                     console.log("UnChecked");
                     init();
                 }
@@ -210,9 +255,10 @@ function remove(){
                 //Append Button to div 
                 $(div).append(button);
                 //Append div to list Item
-                var divId = id.split("deleteButton");
-                divId = divId[0];
+                var divId = id.split("check");
+                divId = divId[1];
                 divId = divId + "div";
+                console.log(divId);
                 document.getElementById(divId).appendChild(div);
                 
                 $('.add').on('click', function(){
@@ -221,13 +267,23 @@ function remove(){
                     $(".add").remove();
                     price = Number(price);
                     totalPrice = price + totalPrice;
-                    totalPrice.toFixed(2);
+                    totalPrice = Math.round(totalPrice * 100)/100;
+                    var auth = firebase.auth().onAuthStateChanged(firebaseUser =>{
+                        if(firebaseUser){
+                            var ref = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid);
+                            var update = {
+                                Price:totalPrice
+                            }
+                            return ref.update(update);
+                        }
+                    });
                     totalPriceString = String("Your current Total is: " + totalPrice);
                     var totalPriceH2 = document.createElement("h2");
                     totalPriceH2.textContent = totalPriceString;
-                    var priceDiv = document.getElementById("price");
+                    var priceDiv = document.getElementById("total");
                     $(priceDiv).empty();
                     $(priceDiv).append(totalPriceH2);
+                    $('.sub').css('display', 'block');
                 });
 
                 $('.add').keyup(function(event){
@@ -235,14 +291,24 @@ function remove(){
                         var price = $(".addInput").val();
                         $(".addInput").remove();
                         $(".add").remove();
-                        price = Number(price).toFixed(2);
                         totalPrice = price + totalPrice;
+                        totalPrice = Math.round(totalPrice * 100)/100;
+                        var auth = firebase.auth().onAuthStateChanged(firebaseUser =>{
+                            if(firebaseUser){
+                                var ref = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid);
+                                var update = {
+                                    Price:totalPrice
+                                }
+                                return ref.update(update);
+                            }
+                        });
                         totalPriceString = String("Your current Total is: " + "$" + totalPrice);
                         var totalPriceH2 = document.createElement("h2");
                         totalPriceH2.textContent = totalPriceString;
-                        var priceDiv = document.getElementById("price");
+                        var priceDiv = document.getElementById("total");
                         $(priceDiv).empty();
                         $(priceDiv).append(totalPriceH2);
+                        $('.sub').css('display', 'block');
                     }
                 });
             }
@@ -260,10 +326,23 @@ function subtract(){
         var input = $('#subInput').val();
         input = Number(input);
         totalPrice = totalPrice - input;
+        totalPrice = Math.round(totalPrice * 100)/100;
+        var auth = firebase.auth().onAuthStateChanged(firebaseUser =>{
+            if(firebaseUser){
+                var ref = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid);
+                var update = {
+                    Price:totalPrice
+                }
+                return ref.update(update);
+            }
+        });
         var totalPriceString = String("Your current Total is: " + totalPrice);
         var totalPriceH2 = document.createElement("h2");
         totalPriceH2.textContent = totalPriceString;
-        $('#price').append(totalPriceH2);
+        $('#total').empty();
+        $('#total').append(totalPriceH2);
+        $('#subButton').css('display', 'none');
+        $('#subInput').css('display', 'none');
     });
 }
 })();

@@ -4,6 +4,7 @@
     <!--Stylesheets-->
     <link href="list.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
 
     <!--Scripts-->
     <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
@@ -22,12 +23,22 @@
             <button id="postItem">Add Item</button>
         </div>
         <div id="price">
-            <button class="sub">Subtract an amount</button>
-            <input type="number" style="display:none;" placeholder="Enter the amount to be subtracted" id="subInput">
-            <button id="subButton" style="display:none;">Subtract</button>
+            <div id="total">
+
+            </div>
+            <div id="subtractDiv">
+                <button class="sub">Subtract an amount</button>
+                <input type="number" style="display:none;" placeholder="Enter the amount to be subtracted" id="subInput">
+                <button id="subButton" style="display:none;">Subtract</button>
+                
+            </div>
         </div>
         <div id="listItems">
             
+        </div>
+        <hr>
+        <div id="checked">
+
         </div>
     </div>
 </body>

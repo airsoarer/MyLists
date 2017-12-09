@@ -1,6 +1,7 @@
 body{
-    background-color: #1f2833;
-    color: white;
+    background-color: #1b5b5b;
+    color: #f7f7f7;
+    font-family: 'Architects Daughter', cursive;
     text-align: center;
     margin: 0px;
     padding: 0px;
@@ -8,15 +9,20 @@ body{
 
 input{
     background-color: transparent;
-    color: #1f2833;
+    color: black;
+    font-size: 36px;
     background-position: center;
     text-align: center;
-    width: 75%;
-    height: 75%;
+}
+
+input[type="text"]{
+    font-size:36px;
 }
 
 button{
-    color:#1f2833 !important;
+    background-color:#4b5b5b;
+    color: #c9d1c9 !important;
+    font-size: 36px;
 }
 
 #itemInput{
@@ -26,8 +32,8 @@ button{
     padding-bottom: 20px;
     background-position: center;
     text-align:center;
-    background-color: #66fcf1;
-    color: #1f2833;
+    background-color: #3b3737;
+    color: #f7f7f7;
 }
 
 #postItem{
@@ -35,8 +41,21 @@ button{
     color:#1f2833;
 }
 
-.listItem{
-    display: inline-table;
+label{
+    height: 25px;
+}
+
+.listItemElement{
+    display:inline-table;
     width: 25%;
-    margin: 2px;
+    height: 25%;
+    margin: 0px;
+}
+
+#checked{
+    margin-top: 50px;
+}
+
+#listItems{
+    margin-bottom: 50px;
 }
