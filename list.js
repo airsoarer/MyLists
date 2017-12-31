@@ -58,6 +58,7 @@ function init(){
                                 string.textContent = "Your current Total is: " + price;
                                 $('#total').append(string);
                             }else{
+                                $('.sub').hide();
                                 var txt = document.createElement("h2");
                                 txt.textContent = "No totaled amount";
                                 $('#total').append(txt);
@@ -97,6 +98,7 @@ function init(){
                     $('#listItems').append(div);
                 });
 
+//Get checked Items
 //================================================================================
                     var checkedRef = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/CheckedItems');
                     checkedRef.on('child_added', function(snapshot){
@@ -128,6 +130,7 @@ function init(){
         }else{
 
         }
+    
     });
     $('#postItem').on('click', send);
     $(document.body).on('click', '#logout', logout);
