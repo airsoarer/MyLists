@@ -326,7 +326,7 @@ function subtract(){
 }
 
 function addBack(){
-    firebase.auth.onAuthStateChanged(firebaseUser =>{
+    firebase.auth().onAuthStateChanged(firebaseUser =>{
         var key = $(this).attr('id');
         var ref1 = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/CheckedItems' + key);
         ref1.on('child_added', function(snapshot){
