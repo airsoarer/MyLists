@@ -134,8 +134,8 @@ function init(){
     $(document.body).on('click', '#leave', leave);
     $(document.body).on('click', '.check', remove);
     $(document.body).on('click', '.sub', subtract);
-    $(document.body).on('click', 'checked', addBack);
-    $(document.body).on('click', 'x', close);
+    $(document.body).on('click', '.checked', addBack);
+    $(document.body).on('click', '#x', close);
     $('#item').keyup(function(event){ 
         if(event.keyCode === 13){
             send();
