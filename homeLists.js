@@ -20,7 +20,6 @@ function init(){
         ref.on("child_added", function(snapshot){
             var keys = snapshot.key;
             keys = [keys];
-            console.log(keys);
             var data = snapshot.val();
 
             //for(var i = 0; i < keys.length; i++){
@@ -37,6 +36,14 @@ function init(){
             textElement.appendChild(listName);
             textElement.appendChild(listDate);
             textElement.appendChild(listDescription);
+            for(var i in data){
+                if(data[i].SharedWith){
+                    var listShare = document.createElement("h5");
+                    listShare.textContent = "Shared with: " +data[i].SharedWith;
+                    $(listShare).css('color', '#000000');
+                    textElement.appendChild(listShare);
+                }
+            }
             listElement.appendChild(textElement);
             //Buttons div
             var buttonsDiv = document.createElement("div");
@@ -57,6 +64,23 @@ function init(){
             $(openBtn).css('border-radius', '10px');
             $(openBtn).css('border-bottom-right-radius', '0px');
             $(openBtn).css('border-top-right-radius', '0px');
+            //Share Button
+            var shareBtnDiv = document.createElement("div");
+            shareBtnDiv.className = "shareBtn";
+            var shareBtn = document.createElement("button");
+            shareBtn.className = "share";
+            var shareLink = document.createElement("a")
+            shareLink.setAttribute('href', 'share.html?room= ' + keys);
+            shareLink.textContent = "Share this List";
+            shareBtn.appendChild(shareLink);
+            shareBtnDiv.appendChild(shareBtn);
+            $(shareLink).css('color', '#f7f7f7');
+            $(shareBtn).css('background-color', '#4b5b5b');
+            $(shareBtn).css('border-bottom-right-radius', '0px');
+            $(shareBtn).css('border-bottom-left-radius', '0px');
+            $(shareBtn).css('border-top-left-radius', '0px');
+            $(shareBtn).css('border-top-right-radius', '0px');
+            buttonsDiv.appendChild(shareBtnDiv);
             //Delete Button
             var deleteBtnDiv = document.createElement("div");
             deleteBtnDiv.className = "deleteBtn";
@@ -79,6 +103,7 @@ function init(){
     }
     $(document.body).on('click', '#logout', logout);
     $(document.body).on('click', '#newList', newList);
+    $(document.body).on('click', '#settings', settings);
     $(document.body).on('click', ".Delete", del);
 }
 
@@ -89,6 +114,10 @@ function newList(){
 function logout(){
     firebase.auth().signOut();
     window.location.replace("login.html");
+}
+
+function settings(){
+    window.location.replace("settings.html?room= " + uid);
 }
 
 function del(){
