@@ -36,7 +36,7 @@ function init(){
                 ref.once("value", function(snapshot){
                     var data = snapshot.val();
                     var title = document.createElement("title");
-                    title.textContent = data.ListName + "— MyLists";
+                    title.textContent = data.ListName + " — MyLists";
                     $('head').append(title);
                     for(var i = 0; i < 1; i++){
                         var h2 = document.createElement("h2");
@@ -300,6 +300,7 @@ function remove(){
 function subtract(){
     $('#subInput').show();
     $('#subButton').show();
+    $('#x').show();
     $('#subButton').on('click', function(){
         var input = $('#subInput').val();
         input = Number(input);
