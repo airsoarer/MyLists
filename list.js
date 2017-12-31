@@ -364,6 +364,8 @@ function addBack(){
 
                 $(div).append(checkbox, label);
                 $('#listItems').append(div);
+
+                ref1.remove();
             });
         });
     });
