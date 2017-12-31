@@ -65,15 +65,16 @@ function look(){
                             });
                         }
                     });
+                    if(userFound === false){
+                        alert("User is not found \n Check your spelling and spacing")
+                    }
                 }
             }else{
                 userFound = false;
             }
         }
+
     });
-    if(userFound === false){
-        alert("User is not found \n Check your spelling and spacing")
-    }
 }
 
 function leave(){
