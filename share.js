@@ -45,6 +45,7 @@ function look(){
                                 var h2 = document.createElement("h2");
                                 h2.textContent = "Your List has been shared with " + name;
                                 div.appendChild(h2);
+                                $('display').append(div);
 
                                 var secondRef = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid);
                                 secondRef.push({
