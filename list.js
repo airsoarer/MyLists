@@ -208,7 +208,7 @@ function remove(){
         if(firebaseUser){
             var btnId = $(this).attr("id");
             var btnIdVal = $(this).val();
-            this.parentNode.removeChild();
+            this.parentNode.removeChild('div');
             btnId = btnId.split("check");
             btnId = btnId[1];
             var labelId = document.getElementById("label" + btnId).innerHTML;
@@ -342,7 +342,7 @@ function addBack(){
                 Item:data,
             });
             ref1.remove();
-            this.parentNode.removeChild();
+            this.parentNode.removeChild('div');
             ref2.once('child_added', function(snapshot){
                 var data = snapshot.val();
                 var item = data.Item;
