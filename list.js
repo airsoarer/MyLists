@@ -332,7 +332,6 @@ function addBack(){
     firebase.auth().onAuthStateChanged(firebaseUser =>{
         var key = $(this).attr('id');
         var item = $(this).text();
-        $(this).emtpy();
         console.log(item)
         key = key.split("check");
         key = key[1];
