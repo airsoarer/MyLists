@@ -293,8 +293,8 @@ function remove(){
         }else{
 
         }
+        $(this).parent().remove();
     });
-    $(this).parent().remove();
 }
 
 function subtract(){
