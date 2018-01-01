@@ -261,7 +261,6 @@ function remove(){
                 var divId = id.split("check");
                 divId = divId[1];
                 divId = divId + "div"
-                console.log(divId);
                 $(divId).append(div);
                 
                 $('.add').on('click', function(){
@@ -289,7 +288,7 @@ function remove(){
                     $('.sub').css('display', 'block');
                 });
             }
-            $(this).parent().remove();
+            //$(this).parent().remove();
         }else{
         }
     });
