@@ -208,13 +208,13 @@ function remove(){
         if(firebaseUser){
             var btnId = $(this).attr("id");
             var btnIdVal = $(this).val();
-            $(this).parent().remove();
             btnId = btnId.split("check");
             btnId = btnId[1];
             var labelId = document.getElementById("label" + btnId).innerHTML;
             var x = btnId + "div";
             console.log(x);
             $(x).html('');
+            $(this).parent().remove();
             firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/Items/' + btnId).remove();
             var ref = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/CheckedItems');
             ref.push({
