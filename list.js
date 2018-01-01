@@ -289,9 +289,9 @@ function remove(){
                     $('.sub').css('display', 'block');
                 });
             }
-            $(this).parent().remove();
         }else{
         }
+        $(btnId).parent().remove();
     });
 }
 
