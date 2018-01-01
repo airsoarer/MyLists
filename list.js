@@ -332,11 +332,11 @@ function addBack(){
     firebase.auth().onAuthStateChanged(firebaseUser =>{
         var key = $(this).attr('id');
         var item = $(this).text();
+        $(this).emtpy();
         console.log(item)
         key = key.split("check");
         key = key[1];
         var ref1 = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/CheckedItems/' + key).remove();
-        $(this).emtpy();
         var ref2 = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/Items');
         ref2.push({
             Item:item,
