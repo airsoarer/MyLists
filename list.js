@@ -208,7 +208,7 @@ function remove(){
         if(firebaseUser){
             var btnId = $(this).attr("id");
             var btnIdVal = $(this).val();
-            this.parentNode.removeChild('div');
+            $(this).parent().remove();
             btnId = btnId.split("check");
             btnId = btnId[1];
             var labelId = document.getElementById("label" + btnId).innerHTML;
