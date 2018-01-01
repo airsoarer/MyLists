@@ -293,7 +293,9 @@ function remove(){
         }else{
 
         }
-        $(this).parent().remove();
+        setTimeout(function(){
+            $(this).parent().remove();
+        }, 5000);
     });
 }
 
