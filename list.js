@@ -214,7 +214,6 @@ function remove(){
             var x = btnId + "div";
             console.log(x);
             $(x).html('');
-            $(this).parent().remove();
             firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/Items/' + btnId).remove();
             var ref = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/CheckedItems');
             ref.push({
@@ -292,6 +291,7 @@ function remove(){
                     $('.sub').css('display', 'block');
                 });
             }
+            $(btnId).parent().remove();
         }else{
             console.log("no user");
         }
