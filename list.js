@@ -341,6 +341,7 @@ function addBack(){
             ref2.push({
                 Item:data,
             });
+            ref1.remove();
             ref2.on('child_added', function(snapshot){
                 var data = snapshot.val();
                 var item = data.Item;
