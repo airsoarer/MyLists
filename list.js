@@ -261,7 +261,7 @@ function remove(){
                 var divId = id.split("check");
                 divId = divId[1];
                 divId = divId + "div"
-                $(divId).append(div);
+                document.getElementById(divId).appendChild(div);
                 
                 $('.add').on('click', function(){
                     var price = $(".addInput").val();
