@@ -212,7 +212,6 @@ function remove(){
             btnId = btnId[1];
             var labelId = document.getElementById("label" + btnId).innerHTML;
             var x = btnId + "div";
-            console.log(x);
             $(x).html('');
             firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/Items/' + btnId).remove();
             var ref = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/CheckedItems');
@@ -223,14 +222,13 @@ function remove(){
             var ref = firebase.database().ref("Users/" + firebaseUser.uid + "/Lists/" + uid);
             ref.once('value', function(snapshot){
                 var data = snapshot.val();
-                console.log(data.TrueFalse);
                 var trueFalse = data.TrueFalse; 
                 trueFalse = String(trueFalse);
 
                 if(trueFalse === "true"){
+                    console.log("working");
                     add();
                 }else if(trueFalse === "false"){
-                    console.log("UnChecked");
                     init();
                 }
             });
@@ -238,7 +236,6 @@ function remove(){
 
             function add(){
                 //Gives totalling functionallity if it is a shopping list
-                console.log("checked");
                 //Create Div for Elements
                 var div = document.createElement("div");
                 div.id = "item";
@@ -263,8 +260,7 @@ function remove(){
                 //Append div to list Item
                 var divId = id.split("check");
                 divId = divId[1];
-                divId = divId + "div";
-                console.log(divId);
+                divId = divId + "div"
                 document.getElementById(divId).appendChild(div);
                 
                 $('.add').on('click', function(){
@@ -294,7 +290,6 @@ function remove(){
             }
             $(this).parent().remove();
         }else{
-            console.log("no user");
         }
     });
 }
@@ -332,7 +327,6 @@ function addBack(){
     //Adds item back to the list if it is allready deleted and marked as done
     firebase.auth().onAuthStateChanged(firebaseUser =>{
         var key = $(this).attr('id');
-        console.log(item)
         key = key.split("check");
         key = key[1];
         var ref1 = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/CheckedItems/' + key);
