@@ -262,8 +262,7 @@ function remove(){
                 divId = divId[1];
                 divId = divId + "div"
                 console.log(divId);
-                document.getElementById(divId).appendChild(div);
-                $(this).parent().remove();
+                $(divId).append(div);
                 
                 $('.add').on('click', function(){
                     var price = $(".addInput").val();
@@ -290,7 +289,7 @@ function remove(){
                     $('.sub').css('display', 'block');
                 });
             }
-            
+            $(this).parent().remove();
         }else{
         }
     });
