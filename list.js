@@ -42,6 +42,7 @@ function init(){
                     var newRef = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid);
                     newRef.once('value', function(snapshot){
                         var data = snapshot.val();
+                        console.log(data)
                         if(data.TrueFalse === "true"){
                             console.log("TrueFalse is true");
                             if(data.Price){
