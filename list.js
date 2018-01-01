@@ -342,7 +342,7 @@ function addBack(){
                 Item:data,
             });
             ref1.remove();
-            this.parentNode.removeChild('div');
+            $(this).parent().remove();
             ref2.once('child_added', function(snapshot){
                 var data = snapshot.val();
                 var item = data.Item;
