@@ -263,6 +263,7 @@ function remove(){
                 divId = divId + "div"
                 console.log(divId);
                 document.getElementById(divId).appendChild(div);
+                $(this).parent().remove();
                 
                 $('.add').on('click', function(){
                     var price = $(".addInput").val();
@@ -291,11 +292,7 @@ function remove(){
             }
             
         }else{
-
         }
-        setTimeout(function(){
-            $(this).parent().remove();
-        }, 5000);
     });
 }
 
