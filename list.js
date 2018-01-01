@@ -13,18 +13,10 @@
     var uid = location.split("=%20");
     uid = uid[1];
 
-//When you add a item to the list, it gives the item div two buttons instead of one.
-//Let me know if there is any other problems or if you think there is something that you think I should add.
-
-//========================================================================================================================================
-
-//What I have left to do:
-//Add close button to the subtract div
-
-//========================================================================================================================================
-
-//In the future: 
-//Add a part of the web app that allows users to look each other up and share the lists with each other.
+/*What I have left to do:
+— Make sure price shows when page loads if it is a shopping list
+— getBack Function 
+*/
  
 function init(){
     firebase.initializeApp(config);
@@ -51,18 +43,22 @@ function init(){
                     newRef.once('value', function(snapshot){
                         var data = snapshot.val();
                         if(data.TrueFalse === "true"){
+                            console.log("TrueFalse is true");
                             if(data.Price){
+                                console.log("There is a price")
                                 var price = data.Price;
                                 totalPrice = price;
                                 var string = document.createElement("h2");
                                 string.textContent = "Your current Total is: " + price;
                                 $('#total').append(string);
                             }else{
+                                console.log("There is not a price")
                                 var txt = document.createElement("h2");
                                 txt.textContent = "No totaled amount";
                                 $('#total').append(txt);
                             }
                         }else{
+                            console.log("TrueFalse is false");
                             $('#subBtn').hide();
                         }
                     });
