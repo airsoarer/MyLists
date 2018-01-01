@@ -291,7 +291,7 @@ function remove(){
                     $('.sub').css('display', 'block');
                 });
             }
-            $(btnId).parent().remove();
+            $(this).parent().remove();
         }else{
             console.log("no user");
         }
