@@ -261,6 +261,7 @@ function remove(){
                 var divId = id.split("check");
                 divId = divId[1];
                 divId = divId + "div"
+                console.log(divId);
                 document.getElementById(divId).appendChild(div);
                 
                 $('.add').on('click', function(){
