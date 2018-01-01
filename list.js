@@ -331,46 +331,40 @@ function addBack(){
     //Adds item back to the list if it is allready deleted and marked as done
     firebase.auth().onAuthStateChanged(firebaseUser =>{
         var key = $(this).attr('id');
+        var item = $(this).text();
+        console.log(item)
         key = key.split("check");
         key = key[1];
-        console.log(key);
-        var ref1 = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/CheckedItems/' + key);
-        ref1.on('child_added', function(snapshot){
+        var ref1 = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/CheckedItems/' + key).remove();
+        $(this).emtpy();
+        var ref2 = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/Items');
+        ref2.push({
+            Item:item,
+        });
+        ref2.on('child_added', function(snapshot){
             var data = snapshot.val();
             var item = data.Item;
-            console.log(item);
-            var ref2 = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/Items')
-            ref2.push({
-                Item:item,
-            });
-            $(this).empty();
-            ref2.on('child_added', function(snapshot){
-                var data = snapshot.val();
-                var item = data.Item;
-                var key = snapshot.key;
+            var key = snapshot.key;
 
-                //Div for Item
-                var div = document.createElement("div");
-                div.className = "listItemElement";
-                div.id = key + "div";
+            //Div for Item
+            var div = document.createElement("div");
+            div.className = "listItemElement";
+            div.id = key + "div";
 
-                var checkbox = document.createElement("input");
-                checkbox.setAttribute('type', 'checkbox');
-                checkbox.id = "check" + key;
-                checkbox.className = "check";
+            var checkbox = document.createElement("input");
+            checkbox.setAttribute('type', 'checkbox');
+            checkbox.id = "check" + key;
+            checkbox.className = "check";
 
-                var label = document.createElement("label");
-                label.setAttribute('for', 'check' + key);
-                label.innerHTML = item;
-                label.id = "label" + key;
-                $(label).css('font-size', '36px');
-                $(label).css('color', '#9b6b6b');
+            var label = document.createElement("label");
+            label.setAttribute('for', 'check' + key);
+            label.innerHTML = item;
+            label.id = "label" + key;
+            $(label).css('font-size', '36px');
+            $(label).css('color', '#9b6b6b');
 
-                $(div).append(checkbox, label);
-                $('#listItems').append(div);
-
-                ref1.remove();
-            });
+            $(div).append(checkbox, label);
+            $('#listItems').append(div);
         });
     });
 }
