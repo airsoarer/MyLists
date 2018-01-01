@@ -70,7 +70,6 @@ function init(){
                 items();
             }
             function items(){
-                //TODO: add checked items to DOM
                 var ref = firebase.database().ref("Users/" + firebaseUser.uid + "/Lists/" + uid + "/Items");
                 ref.on("child_added", function(snapshot){
                     var data = snapshot.val();
@@ -148,7 +147,7 @@ function init(){
 function send(){
     var listItem = $('#item').val();
     $('#item').val('');
-
+    //Creates Items
     firebase.auth().onAuthStateChanged(firebaseUser =>{
         if(firebaseUser){
             var ref = firebase.database().ref("Users/" + firebaseUser.uid + "/Lists/" + uid + "/Items");
@@ -190,12 +189,14 @@ function send(){
 }
 
 function logout(){
+    //Standard logout function 
     firebase.auth().signOut().then(function(){
         window.location.replace("login.html");
     })
 }
 
 function leave(){
+    //Standard go home function 
     firebase.auth().onAuthStateChanged(firebaseUser =>{
         if(firebaseUser){
             window.location.replace("homeLists.html?room= " + firebaseUser.uid);
@@ -206,6 +207,7 @@ function leave(){
 }
 
 function remove(){
+    //Removes item and says it is checked
     firebase.auth().onAuthStateChanged(firebaseUser =>{
         if(firebaseUser){
             var btnId = $(this).attr("id");
@@ -239,6 +241,7 @@ function remove(){
             });
 
             function add(){
+                //Gives totalling functionallity if it is a shopping list
                 console.log("checked");
                 //Create Div for Elements
                 var div = document.createElement("div");
@@ -300,6 +303,7 @@ function remove(){
 }
 
 function subtract(){
+    //Gives subtracting functionallity if it is a shopping list
     $('#subInput').show();
     $('#subButton').show();
     $('#x').show();
@@ -328,12 +332,13 @@ function subtract(){
 }
 
 function addBack(){
+    //Adds item back to the list if it is allready deleted and marked as done
     firebase.auth().onAuthStateChanged(firebaseUser =>{
         var key = $(this).attr('id');
         key = key.split("check");
         key = key[1];
         console.log(key);
-        var ref1 = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/CheckedItems' + key);
+        var ref1 = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/CheckedItems/' + key);
         ref1.on('child_added', function(snapshot){
             var data = snapshot.val();
             var item = data.Item;
