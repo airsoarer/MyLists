@@ -337,11 +337,9 @@ function addBack(){
         var ref1 = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/CheckedItems/' + key);
         ref1.on('child_added', function(snapshot){
             var data = snapshot.val();
-            console.log(data);
-            var item = data.Item;
             var ref2 = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/Items');
             ref2.push({
-                Item:item,
+                Item:data,
             });
             ref2.on('child_added', function(snapshot){
                 var data = snapshot.val();
