@@ -235,6 +235,7 @@ function remove(){
                 }
             });
 
+
             function add(){
                 //Gives totalling functionallity if it is a shopping list
                 console.log("checked");
@@ -342,7 +343,6 @@ function addBack(){
                 Item:data,
             });
             ref1.remove();
-            $(this).parent().remove();
             ref2.once('child_added', function(snapshot){
                 var data = snapshot.val();
                 var item = data.Item;
@@ -369,6 +369,7 @@ function addBack(){
                 $('#listItems').append(div);
             });
         });
+        $(this).parent().remove();
     });
 }
 
