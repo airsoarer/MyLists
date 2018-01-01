@@ -289,10 +289,12 @@ function remove(){
                     $('.sub').css('display', 'block');
                 });
             }
+            
         }else{
+
         }
-        $(btnId).parent().remove();
     });
+    $(this).parent().remove();
 }
 
 function subtract(){
