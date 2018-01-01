@@ -35,6 +35,9 @@ function init(){
                 var ref = firebase.database().ref("Users/" + firebaseUser.uid + "/Lists/" + uid);
                 ref.once("value", function(snapshot){
                     var data = snapshot.val();
+                    var title = document.createElement("title");
+                    title.textContent = data.ListName + " — MyLists";
+                    $('head').append(title);
                     for(var i = 0; i < 1; i++){
                         var h2 = document.createElement("h2");
                         h2.textContent = data.ListName;
@@ -60,7 +63,7 @@ function init(){
                                 $('#total').append(txt);
                             }
                         }else{
-                            
+                            $('#subBtn').hide();
                         }
                     });
                 });
@@ -94,6 +97,7 @@ function init(){
                     $('#listItems').append(div);
                 });
 
+//Get checked Items
 //================================================================================
                     var checkedRef = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/CheckedItems');
                     checkedRef.on('child_added', function(snapshot){
@@ -109,7 +113,7 @@ function init(){
                     checkbox.setAttribute('type', 'checkbox');
                     $(checkbox).attr('checked', 'checked');
                     checkbox.id = "check" + checkedKey;
-                    checkbox.className = "check";
+                    checkbox.className = "checked";
 
                     var label = document.createElement("label");
                     label.setAttribute('for', 'check' + checkedKey);
@@ -125,12 +129,15 @@ function init(){
         }else{
 
         }
+    
     });
     $('#postItem').on('click', send);
     $(document.body).on('click', '#logout', logout);
     $(document.body).on('click', '#leave', leave);
     $(document.body).on('click', '.check', remove);
     $(document.body).on('click', '.sub', subtract);
+    $(document.body).on('click', '.checked', addBack);
+    $(document.body).on('click', '#x', close);
     $('#item').keyup(function(event){ 
         if(event.keyCode === 13){
             send();
@@ -285,32 +292,6 @@ function remove(){
                     $(priceDiv).append(totalPriceH2);
                     $('.sub').css('display', 'block');
                 });
-
-                $('.add').keyup(function(event){
-                    if(event.keyCode === 13){
-                        var price = $(".addInput").val();
-                        $(".addInput").remove();
-                        $(".add").remove();
-                        totalPrice = price + totalPrice;
-                        totalPrice = Math.round(totalPrice * 100)/100;
-                        var auth = firebase.auth().onAuthStateChanged(firebaseUser =>{
-                            if(firebaseUser){
-                                var ref = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid);
-                                var update = {
-                                    Price:totalPrice
-                                }
-                                return ref.update(update);
-                            }
-                        });
-                        totalPriceString = String("Your current Total is: " + "$" + totalPrice);
-                        var totalPriceH2 = document.createElement("h2");
-                        totalPriceH2.textContent = totalPriceString;
-                        var priceDiv = document.getElementById("total");
-                        $(priceDiv).empty();
-                        $(priceDiv).append(totalPriceH2);
-                        $('.sub').css('display', 'block');
-                    }
-                });
             }
         }else{
             console.log("no user");
@@ -321,7 +302,7 @@ function remove(){
 function subtract(){
     $('#subInput').show();
     $('#subButton').show();
-
+    $('#x').show();
     $('#subButton').on('click', function(){
         var input = $('#subInput').val();
         input = Number(input);
@@ -344,5 +325,57 @@ function subtract(){
         $('#subButton').css('display', 'none');
         $('#subInput').css('display', 'none');
     });
+}
+
+function addBack(){
+    firebase.auth().onAuthStateChanged(firebaseUser =>{
+        var key = $(this).attr('id');
+        key = key.split("check");
+        key = key[1];
+        console.log(key);
+        var ref1 = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/CheckedItems' + key);
+        ref1.on('child_added', function(snapshot){
+            var data = snapshot.val();
+            var item = data.Item;
+            var ref2 = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/Items')
+            ref2.push({
+                Item:item,
+            });
+            $(this).empty();
+            ref2.on('child_added', function(snapshot){
+                var data = snapshot.val();
+                var item = data.Item;
+                var key = snapshot.key;
+
+                //Div for Item
+                var div = document.createElement("div");
+                div.className = "listItemElement";
+                div.id = key + "div";
+
+                var checkbox = document.createElement("input");
+                checkbox.setAttribute('type', 'checkbox');
+                checkbox.id = "check" + key;
+                checkbox.className = "check";
+
+                var label = document.createElement("label");
+                label.setAttribute('for', 'check' + key);
+                label.innerHTML = item;
+                label.id = "label" + key;
+                $(label).css('font-size', '36px');
+                $(label).css('color', '#9b6b6b');
+
+                $(div).append(checkbox, label);
+                $('#listItems').append(div);
+
+                ref1.remove();
+            });
+        });
+    });
+}
+
+function close(){
+    $('#subButton').hide();
+    $('#subInput').hide();
+    $('#x').hide();
 }
 })();
