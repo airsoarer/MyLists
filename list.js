@@ -338,6 +338,7 @@ function addBack(){
         ref1.on('child_added', function(snapshot){
             var data = snapshot.val();
             var item = data.Item;
+            console.log(item);
             var ref2 = firebase.database().ref('Users/' + firebaseUser.uid + '/Lists/' + uid + '/Items')
             ref2.push({
                 Item:item,
