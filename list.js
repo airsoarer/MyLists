@@ -43,7 +43,7 @@ function init(){
                     newRef.once('value', function(snapshot){
                         var data = snapshot.val();
                         console.log(data.TrueFalse);
-                        if(data.TrueFalse === "true"){
+                        if(data.TrueFalse === true){
                             console.log("TrueFalse is true");
                             if(data.Price){
                                 console.log("There is a price")
