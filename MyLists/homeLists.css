@@ -1,0 +1,31 @@
+button{
+    cursor: pointer;
+}
+
+.buttons{
+    float: right;
+    padding-right: 10px;
+    display: inline-flex;
+}
+
+.text{
+    text-align: left;
+    float:left;
+    padding-left: 5px;
+}
+
+.listElement{
+    width: 100%;
+    float:left;
+    padding-bottom: 100px;
+}
+
+.listElement:first-of-type{
+    padding-top: 75px;
+}
+
+.listElement button{
+    color: white;
+    width:100px;
+    height: 50px;
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login — MyLists</title>
+    <!--Stylesheets-->
+    <link href="list.css" rel="stylesheet">
+    <link href="login.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
+
+    <!--Scripts-->
+    <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase.js"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+    <script src="./login.js"></script>
+</head>
+<body>
+    <h1>MyLists</h1>
+    <h2><b><u>Login/Sign Up</u></b></h2>
+    <br>
+    <div id="login">
+        <h2>Email</h2>
+        <input type="email" placeholder="Email" id="loginEmail">
+        <h2>Password</h2>
+        <input type="password" placeholder="Password" id="loginPass">
+        <button id="loginBtn">login</button>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div id="signUp">
+        <h2>Email</h2>
+        <input type="email" placeholder="Email" id="signUpEmail">
+        <h2>Name</h2>
+        <input type="text" placeholder="Name" id="name">
+        <h2>Password</h2>
+        <input type="password" placeholder="password" id="signUpPassword">
+        <button id="signUpBtn">Sign Up</button>
+    </div>
+</body>
+</html>
