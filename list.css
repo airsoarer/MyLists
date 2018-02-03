@@ -46,10 +46,7 @@ label{
 }
 
 .listItemElement{
-    display:inline-table;
-    width: 25%;
-    height: 25%;
-    margin: 0px;
+    display:inline-flex;
 }
 
 #checked{
