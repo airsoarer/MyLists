@@ -47,7 +47,7 @@ label{
 
 .listItemElement{
     display:inline-flex;
-    margin:25%;
+    padding:25%;
 }
 
 #checked{
