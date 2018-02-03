@@ -46,7 +46,7 @@ label{
 }
 
 .listItemElement{
-    display:inline-flex;
+    display:inline-block;
     padding:25%;
 }
 
