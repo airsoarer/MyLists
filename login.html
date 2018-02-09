@@ -18,27 +18,56 @@
     <script src="./login.js"></script>
 </head>
 <body>
-    <h1>MyLists</h1>
-    <h2><b><u>Login/Sign Up</u></b></h2>
+    <h1 style="text-align: left; padding-left: 15px;">MyLists</h1>
     <br>
     <div id="login">
-        <h2>Email</h2>
-        <input type="email" placeholder="Email" id="loginEmail">
-        <h2>Password</h2>
-        <input type="password" placeholder="Password" id="loginPass">
-        <button id="loginBtn">login</button>
+        <div class="box-container">
+            <div class="text">
+                <h4>Login</h4>
+                <h5>Enter your Account Email:</h5>
+            </div>
+            <div class="field" id="email">
+                <input class="left-align" type="email" placeholder="Email" id="loginEmail">
+            </div>
+            <div class="text">
+                <h5>Password:</h5>
+            </div>
+            <div class="field" id="pass">
+                <input type="password" placeholder="Password" id="loginPass">
+            </div>
+            <div class="button">
+                <button id="loginBtn">login</button>
+            </div>
+        </div>
     </div>
     <br>
-    <hr>
+    <br>
+    <br>
+    <br>
     <br>
     <div id="signUp">
-        <h2>Email</h2>
-        <input type="email" placeholder="Email" id="signUpEmail">
-        <h2>Name</h2>
-        <input type="text" placeholder="Name" id="name">
-        <h2>Password</h2>
-        <input type="password" placeholder="password" id="signUpPassword">
-        <button id="signUpBtn">Sign Up</button>
+        <div class="box-container">
+            <div class="text">
+                <h4>Sign Up</h4>
+                <h5>Enter your Account Email:</h5>
+            </div>
+            <div class="field" id="email">
+                <input type="email" placeholder="Email" id="signUpEmail">
+            </div>
+            <div class="text">
+                <h5>Enter your Name:</h5>
+            </div>
+            <div class="field">
+                <input type="text" placeholder="Name" id="name">
+            </div>
+            <div class="text">
+                <h5>Enter your Password:</h5>
+            </div>
+            <div class="field" id="pass">
+                <input type="password" placeholder="password" id="signUpPassword">
+            </div>
+            <button id="signUpBtn">Sign Up</button>
+        </div>
     </div>
 </body>
 </html>
