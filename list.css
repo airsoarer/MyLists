@@ -46,10 +46,9 @@ label{
 }
 
 .listItemElement{
-    display:inline-table;
+    display:inline-block;
     width: 25%;
-    height: 25%;
-    margin: 0px;
+    height: 100px;
 }
 
 #checked{
@@ -58,4 +57,5 @@ label{
 
 #listItems{
     margin-bottom: 50px;
+    margin-top: 50px
 }
